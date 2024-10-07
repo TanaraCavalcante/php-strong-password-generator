@@ -5,11 +5,23 @@ Scriviamo tutto (logica e layout) in un unico file index.php
 -->
 
 <?php 
-$userLength = $_GET["legth"];
+$userLength = $_GET["length"];
 
-function getStrongPassword(){
 
+ function getRandonString($length=5){
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&*+-./:;=?@\_|';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[random_int(0, $charactersLength - 1)];
+    }
+
+    return $randomString;
 }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -25,13 +37,14 @@ function getStrongPassword(){
     <main class="container">
         <h1>Strong Password Generator</h1>
         <h2>Genera una password sicura</h2>
+        <p>La tua password è:  <b><?= getRandonString($userLength);?></b></p>
         <section>
             <form action="index.php" method="get">
             <div class="mb-3">
                 <label for="length" class="form-label">Lunghezza della password:</label>
                 <input type="number" name="length" class="form-control" style="width: 15rem;" id="legth">
             </div>
-            <div >
+            <!-- <div >
                 <div class="form-label">Consenti ripetizioni di uno o più caratteri:</div>
                 <div class="mb-1">
                     <input type="radio" name="yes" id="yes">
@@ -52,8 +65,9 @@ function getStrongPassword(){
                 <div class="mb-1">
                     <input type="checkbox" name="simbol" id="simbol">
                     <label for="simbol" class="form-label">Simbolo</label>
-                </div>
-                
+                </div> -->
+                <button type="submit" class="btn btn-primary">Invia</button>
+                <button type="reset" class="btn btn-secondary">Annulla</button>
             </div>
 
             </form>
