@@ -1,27 +1,17 @@
-<!-- Milestone 1
-Creare un form che invii in GET la lunghezza della password.
-Una nostra funzione utilizzerà questo dato per generare una password casuale (composta da lettere, lettere maiuscole, numeri e simboli) da restituire all’utente.
-Scriviamo tutto (logica e layout) in un unico file index.php
--->
-
-<?php 
+<?php
 $userLength = $_GET["length"];
 
+function getRandonString($length=5){
+   $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&*+-./:;=?@\_|';
+   $charactersLength = strlen($characters);
+   $randomString = '';
 
- function getRandonString($length=5){
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&*+-./:;=?@\_|';
-    $charactersLength = strlen($characters);
-    $randomString = '';
+   for ($i = 0; $i < $length; $i++) {
+       $randomString .= $characters[random_int(0, $charactersLength - 1)];
+   }
 
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[random_int(0, $charactersLength - 1)];
-    }
-
-    return $randomString;
+   return $randomString;
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -32,15 +22,21 @@ $userLength = $_GET["length"];
     <title>Password</title>
       <!-- Bootstrap -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+      <!-- CSS -->
+       <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
-    <main class="container">
+    <main >
         <h1>Strong Password Generator</h1>
         <h2>Genera una password sicura</h2>
-        <p>La tua password è:  <b><?= getRandonString($userLength);?></b></p>
+
+        <p>La tua password è: <b><?= getRandonString($userLength)?></b></p>
+    
         <section>
             <form action="index.php" method="get">
-            <div class="mb-3">
+            <div class="mb-3 d-flex justify-content-between">
                 <label for="length" class="form-label">Lunghezza della password:</label>
                 <input type="number" name="length" class="form-control" style="width: 15rem;" id="legth">
             </div>
