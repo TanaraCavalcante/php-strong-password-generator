@@ -30,6 +30,10 @@ section{
     padding: 15px;
 }
 
+div{
+    margin-right: 7rem;
+}
+
 p{
     padding: 15px;
     background-color: #CFF4FC;

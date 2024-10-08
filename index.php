@@ -1,17 +1,18 @@
 <?php
-$userLength = $_GET["length"];
+ include __DIR__ .'/functions/functions.php';
 
-function getRandonString($length=5){
-   $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&*+-./:;=?@\_|';
-   $charactersLength = strlen($characters);
-   $randomString = '';
 
-   for ($i = 0; $i < $length; $i++) {
-       $randomString .= $characters[random_int(0, $charactersLength - 1)];
-   }
 
-   return $randomString;
-}
+
+
+ $messagio = '';
+ 
+ if(isset($_GET["length"]) && !empty($_GET["length"])) {
+    $messagio = getRandonString($_GET["length"]);
+ }else{
+    $messagio = "Non hai messo una lunghezza!";
+ }
+    
 ?>
 
 <!DOCTYPE html>
@@ -31,9 +32,9 @@ function getRandonString($length=5){
     <main >
         <h1>Strong Password Generator</h1>
         <h2>Genera una password sicura</h2>
-
-        <p>La tua password è: <b><?= getRandonString($userLength)?></b></p>
-    
+       
+        <p><b> <?=$messagio?> </b></p>
+          
         <section>
             <form action="index.php" method="get">
             <div class="mb-3 d-flex justify-content-between">
