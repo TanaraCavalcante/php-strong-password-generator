@@ -9,6 +9,6 @@ function getRandonString($length){
     }
  
     return $randomString;
-    }
+}
 
 ?>
